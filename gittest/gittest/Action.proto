@@ -1,0 +1,56 @@
+syntax = "proto3";
+
+package action;
+option java_package = "com.monmall.socket.message";
+
+
+/*
+ * 用户行为
+ * —— 点赞 - 客户端会缓冲一段时间的点赞处理，批量发送给服务器
+ * ———— 点赞返回:
+ * —————— [成功] 当有客户端发生点赞行为的时候，服务器会以 [通知] 给直播间里的所有人，进行点赞总数的返回
+ * —————— [失败] 会有 error，进行提示
+ *
+ * —— 切换直播间 - 客户端从 哪个 room 到 哪个 room
+ * ———— 成功无提示；失败 error 提示
+ */
+enum ActionType {
+  ActionTypeNone = 0;
+  ActionTypePraise = 1;             // 行为 - 点赞
+  ActionTypeSwitchRoom = 2;         // 行为 - 切换直播间
+  ActionTypeTest = 3;               // 行为 - 测试
+}
+
+
+/* ———————————————————————————————— 请求 —————————————————————————————————————————————————————— */
+message ActionReq {
+  ActionType type = 1;                    // 类型
+  fixed32 reqId = 2;                      // 操作id，方便客户端用于区分
+  string channelId = 3;                   // 传递 channel-id(客户端的id) 方便进行操作
+  oneof ActionBody {// 内容
+    ActionReqPraise praise = 4;
+    ActionReqSwitchRoom switch = 5;
+    ActionReqTest test = 6;
+  }
+}
+
+message ActionReqPraise {
+  string uuid = 1;            // 用户id (登录 → uid | 未登录 → 用设备uuid [不能带 : ])
+  string roomId = 2;          // 直播间的id → 商户id:直播间unique:场次id
+  fixed32 times = 3;          // 点赞了几次
+  bool anonymous = 4;         // 是否匿名 → 未登录 true | 登录 false
+  string nickname = 5;        // 昵称
+}
+
+message ActionReqSwitchRoom {
+  string uuid = 1;            // 用户id (登录 → uid | 未登录 → 用设备uuid [不能带 : ])
+  string nickname = 2;        // 昵称
+  string fromRoomId = 3;      // (旧的)直播间的id → 商户id:直播间unique:场次id
+  string toRoomId = 4;        // (新的)直播间的id → 商户id:直播间unique:场次id
+  bool announced = 5;         // 是否进行公告
+  bool anonymous = 6;         // 是否匿名 → 未登录 true | 登录 false
+}
+
+message ActionReqTest {
+  string uuid = 1;
+}

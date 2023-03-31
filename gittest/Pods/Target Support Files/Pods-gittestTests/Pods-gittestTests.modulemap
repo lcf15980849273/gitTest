@@ -1,0 +1,6 @@
+framework module Pods_gittestTests {
+  umbrella header "Pods-gittestTests-umbrella.h"
+
+  export *
+  module * { export * }
+}

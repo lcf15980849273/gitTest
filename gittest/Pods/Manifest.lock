@@ -1,0 +1,21 @@
+PODS:
+  - CFTimer (0.1.0)
+  - Protobuf (3.19.4)
+
+DEPENDENCIES:
+  - CFTimer
+  - Protobuf
+
+SPEC REPOS:
+  https://github.com/CocoaPods/Specs.git:
+    - Protobuf
+  https://github.com/lcf15980849273/personalSpec.git:
+    - CFTimer
+
+SPEC CHECKSUMS:
+  CFTimer: 56a8b30f975ba6fb4f5a118000f4a986085bf30d
+  Protobuf: 235750e4696ff59fb07d949a9dbbc92b3c0700fe
+
+PODFILE CHECKSUM: 4263a3088a65ad6260914e83e72da516065ed3f3
+
+COCOAPODS: 1.11.2

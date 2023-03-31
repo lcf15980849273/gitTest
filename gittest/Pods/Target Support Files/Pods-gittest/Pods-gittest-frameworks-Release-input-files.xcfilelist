@@ -1,0 +1,3 @@
+${PODS_ROOT}/Target Support Files/Pods-gittest/Pods-gittest-frameworks.sh
+${BUILT_PRODUCTS_DIR}/CFTimer/CFTimer.framework
+${BUILT_PRODUCTS_DIR}/Protobuf/Protobuf.framework

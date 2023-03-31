@@ -1,0 +1,6 @@
+framework module CFTimer {
+  umbrella header "CFTimer-umbrella.h"
+
+  export *
+  module * { export * }
+}
